@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="dashboard-topline">
+        <p class="eyebrow">YOUR DASHBOARD</p>
+        <span class="session-badge"><span class="status-dot" aria-hidden="true"></span> Signed in</span>
+    </div>
+    <section class="welcome-panel" aria-labelledby="welcome-title">
+        <div class="welcome-icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-8h6v8"/></svg>
+        </div>
+        <h1 id="welcome-title">Welcome, <span>{{ user.username }}</span>.</h1>
+        <p>You're signed in and right where you belong.</p>
+    </section>
+
+    <section class="account-card" aria-labelledby="account-title">
+        <div class="card-header"><h2 id="account-title">Your account</h2><span>Just the essentials</span></div>
+        <dl class="account-details">
+            <div><dt>Username</dt><dd>{{ user.username }}</dd></div>
+            <div><dt>Email address</dt><dd>{{ user.email|default:"No email address added" }}</dd></div>
+            <div><dt>Member since</dt><dd>{{ user.date_joined|date:"F j, Y" }}</dd></div>
+        </dl>
+        <div class="account-footer">
+            <p>All done for now? You can sign back in anytime.</p>
+            <form method="post" action="{% url 'accounts:logout' %}">
+                {% csrf_token %}
+                <button class="button button-secondary" type="submit">Sign out <span aria-hidden="true">&rarr;</span></button>
+            </form>
+        </div>
+    </section>
+    <p class="dashboard-note">Your space, available whenever you sign in.</p>
+</div>
+{% endblock %}

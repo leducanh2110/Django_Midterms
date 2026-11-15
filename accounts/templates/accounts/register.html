@@ -1,0 +1,17 @@
+{% extends "auth_base.html" %}
+
+{% block title %}Create account{% endblock %}
+
+{% block auth_content %}
+<div class="form-heading">
+    <p class="eyebrow">A FRESH START</p>
+    <h2 id="form-title">Make yourself at home.</h2>
+    <p>A few details and your account is ready to go.</p>
+</div>
+<form method="post" action="{% url 'accounts:register' %}" novalidate>
+    {% csrf_token %}
+    {% include "accounts/_form_fields.html" %}
+    <button class="button button-primary" type="submit">Create account <span aria-hidden="true">&rarr;</span></button>
+</form>
+<p class="form-switch">Already have an account? <a href="{% url 'accounts:login' %}">Sign in</a></p>
+{% endblock %}

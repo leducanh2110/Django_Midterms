@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A simple Django demo for creating an account, signing in, and accessing your dashboard.">
+    <title>{% block title %}AuthDemo{% endblock %} · Django Auth Demo</title>
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+        <header class="site-header">
+            <a class="brand" href="{% url 'home' %}" aria-label="AuthDemo home">
+                <span class="brand-mark" aria-hidden="true">a.</span>
+                <span>auth<span class="brand-light">demo</span></span>
+            </a>
+            <span class="demo-label"><span class="status-dot" aria-hidden="true"></span> Django authentication demo</span>
+        </header>
+
+        <main id="main-content" tabindex="-1">
+            {% if messages %}
+                <div class="messages" aria-live="polite">
+                    {% for message in messages %}
+                        <div class="notice {{ message.tags }}" role="status">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="site-footer">
+            <span>A small project. The fundamentals, covered.</span>
+            <span>Built with <span class="footer-django">Django</span> &amp; Python</span>
+        </footer>
+    </div>
+</body>
+</html>
